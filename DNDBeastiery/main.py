@@ -5,6 +5,7 @@
 import numpy as np
 import pandas as pd
 import json
+from Classes.Utillity.Dice import Dice
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -96,39 +97,45 @@ def calculate_modifier_from_ab_score(score):
     return (score - 10) / 3
 
 if __name__ == '__main__':
-    df = pd.read_json(get_monsters())
-    print(df.info())
-    total_bonus = 0
-    count = 0
-    for index, row in df.iterrows():
-        if row['cr'] == '3':
-            bonus = 0
-            bonus += calculate_modifier_from_ab_score(row['str']) if row['str'] > 5 else 0
-            bonus += calculate_modifier_from_ab_score(row['dex']) if row['dex'] > 5 else 0
-            bonus += calculate_modifier_from_ab_score(row['con']) if row['con'] > 5 else 0
-            bonus += calculate_modifier_from_ab_score(row['int']) if row['int'] > 5 else 0
-            bonus += calculate_modifier_from_ab_score(row['wis']) if row['wis'] > 5 else 0
-            bonus += calculate_modifier_from_ab_score(row['cha']) if row['cha'] > 5 else 0
-            total_bonus += bonus
-            count += 1
-            if bonus > 6:
-                print(str(bonus) + "larger than 6")
-                print(row['str'])
-                print(row['dex'])
-                print(row['con'])
-                print(row['int'])
-                print(row['wis'])
-                print(row['cha'])
-            if bonus < 4:
-                print(str(bonus) + "smaller than 4")
-                print(row['str'])
-                print(row['dex'])
-                print(row['con'])
-                print(row['int'])
-                print(row['wis'])
-                print(row['cha'])
-    print(total_bonus / count)
-    print(count)
+    # df = pd.read_json(get_monsters())
+    # print(df.info())
+    # total_bonus = 0
+    # count = 0
+    # for index, row in df.iterrows():
+    #     if row['cr'] == '3':
+    #         bonus = 0
+    #         bonus += calculate_modifier_from_ab_score(row['str']) if row['str'] > 5 else 0
+    #         bonus += calculate_modifier_from_ab_score(row['dex']) if row['dex'] > 5 else 0
+    #         bonus += calculate_modifier_from_ab_score(row['con']) if row['con'] > 5 else 0
+    #         bonus += calculate_modifier_from_ab_score(row['int']) if row['int'] > 5 else 0
+    #         bonus += calculate_modifier_from_ab_score(row['wis']) if row['wis'] > 5 else 0
+    #         bonus += calculate_modifier_from_ab_score(row['cha']) if row['cha'] > 5 else 0
+    #         total_bonus += bonus
+    #         count += 1
+    #         if bonus > 6:
+    #             print(str(bonus) + "larger than 6")
+    #             print(row['str'])
+    #             print(row['dex'])
+    #             print(row['con'])
+    #             print(row['int'])
+    #             print(row['wis'])
+    #             print(row['cha'])
+    #         if bonus < 4:
+    #             print(str(bonus) + "smaller than 4")
+    #             print(row['str'])
+    #             print(row['dex'])
+    #             print(row['con'])
+    #             print(row['int'])
+    #             print(row['wis'])
+    #             print(row['cha'])
+    # print(total_bonus / count)
+    # print(count)
+    d4 = Dice(4)
+    d6 = Dice(6)
+    d8 = Dice(8)
+    d10 = Dice(10)
+    d12 = Dice(12)
+    d20 = Dice(20)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
